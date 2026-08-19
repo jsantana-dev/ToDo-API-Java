@@ -5,9 +5,9 @@ import todo_api_java.model.Status;
 import todo_api_java.model.Tarefa;
 import todo_api_java.repository.TarefaRepository;
 import todo_api_java.service.TarefaService;
+import todo_api_java.exception.TarefaNaoEncontradaException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class TarefaServiceImpl implements TarefaService {
@@ -32,7 +32,7 @@ public class TarefaServiceImpl implements TarefaService {
     @Override
     public Tarefa buscarPorId(Long id) {
         return tarefaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Tarefa não encontrada com id: " + id));
+                .orElseThrow(() -> new TarefaNaoEncontradaException(id));
     }
 
     @Override
