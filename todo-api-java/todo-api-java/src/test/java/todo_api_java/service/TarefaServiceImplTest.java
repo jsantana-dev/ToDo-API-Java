@@ -9,6 +9,7 @@ import todo_api_java.model.Status;
 import todo_api_java.model.Tarefa;
 import todo_api_java.repository.TarefaRepository;
 import todo_api_java.service.impl.TarefaServiceImpl;
+import todo_api_java.exception.TarefaNaoEncontradaException;
 
 import java.util.Optional;
 
@@ -35,6 +36,18 @@ class TarefaServiceImplTest {
         assertEquals("Estudar java", resultado.getTitulo());
         assertEquals(Status.PENDENTE, resultado.getStatus());
         verify(tarefaRepository, times(1)).save(any(Tarefa.class));
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoTarefaNaoExiste() {
+        Long idInexistente = 999L;
+        when(tarefaRepository.findById(idInexistente)).thenReturn(Optional.empty());
+
+        assertThrows(TarefaNaoEncontradaException.class, () -> {
+           tarefaService.buscarPorId(idInexistente);
+        });
+
+        verify(tarefaRepository, times(1)).findById(idInexistente);
     }
 }
 
