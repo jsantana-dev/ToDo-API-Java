@@ -32,6 +32,10 @@ public class TarefaResponseDTO {
         return descricao;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
