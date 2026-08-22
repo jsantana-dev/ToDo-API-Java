@@ -1,0 +1,13 @@
+$kind: http-request
+name: http://localhost:8080/tarefas
+description: ""
+url: http://localhost:8080/tarefas
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "titulo": "Minha primeira tarefa",
+      "descricao": "Testando validacao"
+    }
+order: 1787273444907
